@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Favour Tumbra Egberike — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0F1613;
+    --bg-raised: #161F1B;
+    --bg-card: #1A2420;
+    --line: #2A3733;
+    --text: #ECE8DF;
+    --text-dim: #9CA8A0;
+    --text-faint: #6B7871;
+    --gold: #C89B3C;
+    --gold-soft: rgba(200,155,60,0.14);
+    --teal: #4B8F84;
+    --teal-soft: rgba(75,143,132,0.16);
+  }
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  ::selection{ background: var(--gold-soft); color: var(--gold); }
+
+  h1,h2,h3{ font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -0.01em; }
+  .mono{ font-family: 'IBM Plex Mono', monospace; }
+  a{ color: inherit; text-decoration: none; }
+
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 32px; }
+  section{ position: relative; padding: 100px 0; }
+  @media (max-width: 640px){ section{ padding: 64px 0; } .wrap{ padding: 0 20px; } }
+
+  /* Signal wave divider */
+  .signal-divider{ width:100%; height:36px; display:block; opacity:0.55; }
+  .signal-divider path{ fill:none; stroke:var(--teal); stroke-width:1.4; }
+
+  /* NAV */
+  nav{
+    position: fixed; top:0; left:0; right:0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(15,22,19,0.72);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; padding: 18px 32px; }
+  .brand{ font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem; letter-spacing: 0.01em; }
+  .brand .dot{ color: var(--gold); }
+  .navlinks{ display:flex; gap: 28px; font-size: 0.86rem; color: var(--text-dim); }
+  .navlinks a:hover{ color: var(--gold); }
+  @media (max-width: 640px){ .navlinks{ display:none; } }
+
+  /* HERO */
+  .hero{ padding-top: 168px; padding-bottom: 90px; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 22px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:''; width:22px; height:1px; background: var(--teal); display:inline-block; }
+  .hero h1{
+    font-size: clamp(2.4rem, 5.4vw, 4.1rem);
+    line-height: 1.08;
+    max-width: 15ch;
+    margin-bottom: 28px;
+  }
+  .hero h1 em{ font-style: italic; color: var(--gold); }
+  .hero p.lede{
+    max-width: 56ch; color: var(--text-dim); font-size: 1.08rem; margin-bottom: 40px;
+  }
+  .hero-meta{ display:flex; flex-wrap:wrap; gap: 28px; font-size: 0.85rem; color: var(--text-faint); }
+  .hero-meta span{ display:flex; align-items:center; gap:8px; }
+  .hero-meta strong{ color: var(--text-dim); font-weight: 500; }
+
+  .hero-graphic{ margin-top: 56px; height: 120px; width: 100%; opacity: 0.9; }
+  .hero-graphic path{ fill:none; stroke: var(--teal); stroke-width: 1.6; }
+  .hero-graphic path.noise{ stroke: var(--text-faint); stroke-width: 1; opacity: 0.5; }
+  .hero-graphic .label{ font-family:'IBM Plex Mono',monospace; font-size: 10px; fill: var(--text-faint); letter-spacing: 0.08em; }
+
+  /* SECTION HEADS */
+  .sec-head{ display:flex; align-items:baseline; gap: 16px; margin-bottom: 44px; }
+  .sec-head .idx{ font-family:'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--gold); }
+  .sec-head h2{ font-size: clamp(1.6rem, 3vw, 2.1rem); }
+  .sec-sub{ color: var(--text-dim); max-width: 60ch; margin-top: -28px; margin-bottom: 44px; font-size: 0.98rem; }
+
+  /* FEATURED PROJECT */
+  .feature-card{
+    background: var(--bg-card); border: 1px solid var(--line); border-radius: 4px;
+    padding: 44px; display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items:center;
+  }
+  @media (max-width: 800px){ .feature-card{ grid-template-columns: 1fr; padding: 28px; } }
+  .feature-card h3{ font-size: 1.5rem; margin-bottom: 14px; }
+  .feature-card p{ color: var(--text-dim); font-size: 0.98rem; margin-bottom: 20px; }
+  .tagset{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom: 22px; }
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size: 0.72rem; padding: 5px 10px;
+    border: 1px solid var(--line); border-radius: 20px; color: var(--text-dim);
+  }
+  .feature-stats{ display:flex; gap: 30px; }
+  .stat .n{ font-family:'Fraunces', serif; font-size: 1.8rem; color: var(--gold); }
+  .stat .l{ font-size: 0.78rem; color: var(--text-faint); }
+
+  #network-canvas{ width:100%; height: 260px; display:block; }
+
+  /* EXPERIENCE TIMELINE */
+  .tl-item{
+    display:grid; grid-template-columns: 130px 1fr; gap: 24px;
+    padding: 26px 0; border-top: 1px solid var(--line);
+  }
+  .tl-item:last-child{ border-bottom: 1px solid var(--line); }
+  @media (max-width: 640px){ .tl-item{ grid-template-columns: 1fr; gap: 6px; } }
+  .tl-date{ font-family:'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--teal); }
+  .tl-role{ font-size: 1.08rem; font-weight: 500; margin-bottom: 4px; }
+  .tl-org{ color: var(--text-faint); font-size: 0.88rem; margin-bottom: 10px; }
+  .tl-desc{ color: var(--text-dim); font-size: 0.94rem; max-width: 62ch; }
+
+  /* SKILLS */
+  .skills-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  @media (max-width: 720px){ .skills-grid{ grid-template-columns: 1fr; } }
+  .skill-group .g-title{
+    font-family:'IBM Plex Mono', monospace; font-size: 0.74rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+  }
+  .skill-list{ display:flex; flex-wrap:wrap; gap:8px; }
+  .skill-pill{
+    font-size: 0.85rem; padding: 7px 13px; border-radius: 3px;
+    background: var(--bg-card); border: 1px solid var(--line); color: var(--text-dim);
+  }
+
+  /* CERTS */
+  .cert-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding: 16px 0; border-top: 1px solid var(--line); font-size: 0.94rem;
+  }
+  .cert-row:last-child{ border-bottom: 1px solid var(--line); }
+  .cert-row .issuer{ color: var(--text-faint); font-family:'IBM Plex Mono', monospace; font-size: 0.78rem; }
+
+  /* CONTACT */
+  .contact-wrap{ text-align:center; }
+  .contact-wrap h2{ font-size: clamp(1.8rem, 4vw, 2.6rem); max-width: 18ch; margin: 0 auto 20px; }
+  .contact-wrap p{ color: var(--text-dim); max-width: 50ch; margin: 0 auto 40px; }
+  .contact-links{ display:flex; flex-wrap:wrap; justify-content:center; gap: 14px; }
+  .pill-link{
+    font-family:'IBM Plex Mono', monospace; font-size: 0.82rem;
+    border: 1px solid var(--line); padding: 12px 22px; border-radius: 30px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .pill-link:hover{ border-color: var(--gold); color: var(--gold); }
+  footer{ text-align:center; padding: 40px 0; color: var(--text-faint); font-size: 0.8rem; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+
+  .fade-up{ opacity:0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.in{ opacity:1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Favour<span class="dot">.</span>E</div>
+    <div class="navlinks">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="eyebrow">Lagos, Nigeria</div>
+  <h1>I turn <em>noisy</em> data into decisions people can act on.</h1>
+  <p class="lede">Favour Tumbra Egberike — data analyst working across financial inclusion, international development, and industrial operations. Two years in data analytics, five before that in business development, which mostly means I don't stop at the model. I stay until the insight actually changes something.</p>
+  <div class="hero-meta">
+    <span><strong>Currently</strong> Data Analyst, WAFA</span>
+    <span><strong>Focus</strong> Python · SQL · R · Power BI</span>
+    <span><strong>Based in</strong> Lagos, Nigeria</span>
+  </div>
+
+  <svg class="hero-graphic" viewBox="0 0 900 120" preserveAspectRatio="none" aria-hidden="true">
+    <path class="noise" d="M0,60 L20,72 L40,48 L60,80 L80,40 L100,66 L120,52 L140,74 L160,44 L180,62 L200,50" />
+    <text class="label" x="0" y="100">raw signal</text>
+    <path id="signal-path" d="M220,60 C 320,60 320,20 420,20 C 520,20 520,60 620,60 C 720,60 720,40 900,40" />
+    <text class="label" x="620" y="100">resolved insight</text>
+  </svg>
+</header>
+
+<svg class="signal-divider wrap" viewBox="0 0 900 36" preserveAspectRatio="none"><path d="M0,18 Q 25,4 50,18 T 100,18 T 150,18 T 200,18 T 250,18 T 300,18 T 350,18 T 400,18 T 450,18 T 500,18 T 550,18 T 600,18 T 650,18 T 700,18 T 750,18 T 800,18 T 850,18 T 900,18"/></svg>
+
+<section id="work" class="wrap fade-up">
+  <div class="sec-head"><span class="idx">Featured</span><h2>Global Findex, 30+ countries</h2></div>
+  <p class="sec-sub">A DataKind internship built around the World Bank's Global Financial Inclusion dataset — turning household-level survey data from across Africa into a live tool for predicting financial access.</p>
+
+  <div class="feature-card">
+    <div>
+      <h3>Predicting financial access at scale</h3>
+      <p>I worked with the World Bank's Global Findex dataset spanning more than 30 African countries, cleaning and modeling household financial behavior data, then training machine learning models to predict patterns of financial access and exclusion. The output wasn't just a notebook — it became a live predictive application that non-technical stakeholders could actually query.</p>
+      <div class="tagset">
+        <span class="tag">Python</span>
+        <span class="tag">Machine Learning</span>
+        <span class="tag">World Bank Global Findex</span>
+        <span class="tag">DataKind</span>
+      </div>
+      <div class="feature-stats">
+        <div class="stat"><div class="n">30+</div><div class="l">countries covered</div></div>
+        <div class="stat"><div class="n">1</div><div class="l">live predictive app shipped</div></div>
+      </div>
+    </div>
+    <canvas id="network-canvas" aria-label="Animated network diagram representing 30+ African countries connected in a data model"></canvas>
+  </div>
+</section>
+
+<svg class="signal-divider wrap" viewBox="0 0 900 36" preserveAspectRatio="none"><path d="M0,18 Q 25,4 50,18 T 100,18 T 150,18 T 200,18 T 250,18 T 300,18 T 350,18 T 400,18 T 450,18 T 500,18 T 550,18 T 600,18 T 650,18 T 700,18 T 750,18 T 800,18 T 850,18 T 900,18"/></svg>
+
+<section id="experience" class="wrap fade-up">
+  <div class="sec-head"><span class="idx">Path</span><h2>Experience</h2></div>
+
+  <div class="tl-item">
+    <div class="tl-date mono">Jun 2026 — Present</div>
+    <div>
+      <div class="tl-role">Data Analyst</div>
+      <div class="tl-org">WAFA · Copenhagen-based NGO (Remote)</div>
+      <div class="tl-desc">Supporting data-driven decision-making for international development programming, from data collection design through analysis and reporting.</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-date mono">2024 — Present</div>
+    <div>
+      <div class="tl-role">Data Analyst</div>
+      <div class="tl-org">United Nations Volunteers</div>
+      <div class="tl-desc">Analyzing program and operational data to inform UN Volunteers initiatives, working across datasets to surface trends that shape decisions on the ground.</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-date mono">2023 — 2024</div>
+    <div>
+      <div class="tl-role">DataKind Intern — Data Analyst</div>
+      <div class="tl-org">DataKind</div>
+      <div class="tl-desc">Led analysis of the World Bank's Global Findex dataset across 30+ African countries; trained ML models and helped ship a live predictive application on financial inclusion.</div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-date mono">2+ / 5 yrs</div>
+    <div>
+      <div class="tl-role">Business Development → Data Analytics</div>
+      <div class="tl-org">Fintech, Real Estate & Industrial Tech</div>
+      <div class="tl-desc">Five years in business development before moving into analytics — work that included cutting processing time by roughly 80% and speeding up reporting cycles by about 40% through better data workflows.</div>
+    </div>
+  </div>
+</section>
+
+<svg class="signal-divider wrap" viewBox="0 0 900 36" preserveAspectRatio="none"><path d="M0,18 Q 25,4 50,18 T 100,18 T 150,18 T 200,18 T 250,18 T 300,18 T 350,18 T 400,18 T 450,18 T 500,18 T 550,18 T 600,18 T 650,18 T 700,18 T 750,18 T 800,18 T 850,18 T 900,18"/></svg>
+
+<section id="skills" class="wrap fade-up">
+  <div class="sec-head"><span class="idx">Toolkit</span><h2>Skills & Tools</h2></div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="g-title">Languages & Analysis</div>
+      <div class="skill-list">
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">SQL</span>
+        <span class="skill-pill">R</span>
+        <span class="skill-pill">SPSS</span>
+        <span class="skill-pill">STATA</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="g-title">Visualization & BI</div>
+      <div class="skill-list">
+        <span class="skill-pill">Power BI</span>
+        <span class="skill-pill">Tableau</span>
+        <span class="skill-pill">Excel</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="g-title">Field & Applied Data</div>
+      <div class="skill-list">
+        <span class="skill-pill">KoboToolbox</span>
+        <span class="skill-pill">ODK</span>
+        <span class="skill-pill">LLM-assisted pipelines</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="signal-divider wrap" viewBox="0 0 900 36" preserveAspectRatio="none"><path d="M0,18 Q 25,4 50,18 T 100,18 T 150,18 T 200,18 T 250,18 T 300,18 T 350,18 T 400,18 T 450,18 T 500,18 T 550,18 T 600,18 T 650,18 T 700,18 T 750,18 T 800,18 T 850,18 T 900,18"/></svg>
+
+<section class="wrap fade-up">
+  <div class="sec-head"><span class="idx">Credentials</span><h2>Certifications</h2></div>
+  <div class="cert-row"><span>Data Scientist Professional</span><span class="issuer">DataCamp</span></div>
+  <div class="cert-row"><span>Data Analyst Professional</span><span class="issuer">DataCamp</span></div>
+  <div class="cert-row"><span>SQL Associate</span><span class="issuer">DataCamp</span></div>
+  <div class="cert-row"><span>Google Data Analytics Certificate</span><span class="issuer">Google</span></div>
+  <div class="cert-row"><span>Google Project Management Certificate</span><span class="issuer">Google</span></div>
+  <div class="cert-row"><span>BSc Computer Science, Second Class Upper</span><span class="issuer">National Open University of Nigeria</span></div>
+</section>
+
+<svg class="signal-divider wrap" viewBox="0 0 900 36" preserveAspectRatio="none"><path d="M0,18 Q 25,4 50,18 T 100,18 T 150,18 T 200,18 T 250,18 T 300,18 T 350,18 T 400,18 T 450,18 T 500,18 T 550,18 T 600,18 T 650,18 T 700,18 T 750,18 T 800,18 T 850,18 T 900,18"/></svg>
+
+<section id="contact" class="wrap contact-wrap fade-up">
+  <div class="eyebrow" style="justify-content:center;">Let's talk</div>
+  <h2>Open to data analytics and impact-sector roles, remote or Lagos-based.</h2>
+  <p>If you're hiring, collaborating, or just want to talk through a dataset — reach out.</p>
+  <div class="contact-links">
+    <a class="pill-link" href="mailto:favourtumbraegberike@gmail.com">Email</a>
+    <a class="pill-link" href="https://linkedin.com/in/favour-tumbra-egberike-485a479b" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="pill-link" href="https://github.com/favouregberike" target="_blank" rel="noopener">GitHub</a>
+    <a class="pill-link" href="https://datacamp.com/portfolio/favourtumbraegberike" target="_blank" rel="noopener">DataCamp Portfolio</a>
+    <a class="pill-link" href="tel:+2349012799091">+234 901 279 9091</a>
+  </div>
+</section>
+
+<footer>Favour Tumbra Egberike — Lagos, Nigeria</footer>
+
+<script>
+  // Fade-up on scroll
+  const els = document.querySelectorAll('.fade-up');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, { threshold: 0.12 });
+  els.forEach(el=>io.observe(el));
+
+  // Network canvas: nodes representing 30+ countries connecting into a resolved cluster
+  const canvas = document.getElementById('network-canvas');
+  const ctx = canvas.getContext('2d');
+  let w, h, nodes = [];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function resize(){
+    const rect = canvas.getBoundingClientRect();
+    w = canvas.width = rect.width * devicePixelRatio;
+    h = canvas.height = rect.height * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+
+  function initNodes(){
+    nodes = [];
+    const count = 34;
+    const cx = canvas.getBoundingClientRect().width / 2;
+    const cy = canvas.getBoundingClientRect().height / 2;
+    for(let i=0;i<count;i++){
+      const angle = (i / count) * Math.PI * 2;
+      const radius = 60 + Math.random()*70;
+      nodes.push({
+        x: cx + Math.cos(angle) * radius + (Math.random()-0.5)*20,
+        y: cy + Math.sin(angle) * radius + (Math.random()-0.5)*20,
+        cx: cx, cy: cy,
+        phase: Math.random()*Math.PI*2
+      });
+    }
+  }
+
+  function draw(t){
+    const rect = canvas.getBoundingClientRect();
+    ctx.clearRect(0,0,rect.width, rect.height);
+    ctx.strokeStyle = 'rgba(75,143,132,0.25)';
+    ctx.lineWidth = 0.6;
+
+    nodes.forEach((n, i)=>{
+      // gentle drift toward center over time (resolving signal)
+      n.x += (n.cx - n.x) * 0.0016;
+      n.y += (n.cy - n.y) * 0.0016;
+    });
+
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        const a = nodes[i], b = nodes[j];
+        const d = Math.hypot(a.x-b.x, a.y-b.y);
+        if(d < 70){
+          ctx.globalAlpha = 1 - d/70;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+    ctx.globalAlpha = 1;
+    nodes.forEach(n=>{
+      const pulse = 1.6 + Math.sin(t*0.002 + n.phase)*0.6;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, pulse, 0, Math.PI*2);
+      ctx.fillStyle = '#C89B3C';
+      ctx.fill();
+    });
+
+    if(!reduceMotion){ requestAnimationFrame(draw); }
+  }
+
+  function setup(){ resize(); initNodes(); draw(0); }
+  window.addEventListener('resize', setup);
+  setup();
+</script>
+
+</body>
+</html>
